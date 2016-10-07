@@ -7,7 +7,7 @@ clear
 clc
 
 C = 10;
-limit = 2;
+limit = 1;
 eta = 0;
 sigma = sqrt(1);
 
