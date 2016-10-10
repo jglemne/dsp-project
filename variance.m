@@ -1,4 +1,4 @@
-function v = stvar(eta,sigma,low,high)
+function v = variance(eta,sigma,low,high)
 
 fai = @(value) exp(-(value-eta).^2/(2*sigma^2))/sqrt(2*pi*sigma^2);
 FAI = 1/integral(fai,low,high);
@@ -7,4 +7,3 @@ second = FAI^2*((fai(low)-fai(high))^2);
 v = first - second;
 
 return
-end

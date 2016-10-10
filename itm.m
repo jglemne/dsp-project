@@ -1,49 +1,27 @@
-%% ITM - Inverse transformation method
-%% Normal distribution
+% Function: itm (inverse transformation method)
+%
+% Parameters:
+% Parameters:
+% cdf - vector with values for the cumulative distribution function
+% values - values interval
+% truncInterval - where to truncate the interval
+%
+% Return: random number according to given distribution
+function variate = itm(cdf,values,truncInterval)
 
-C = 10;
-eta = 0;
-sigma = sqrt(1);
-interval = linspace(-C,C,10001);
-len = length(interval);
-df = zeros(1,len);
-fai = @(value) exp(-(value-eta).^2/(2*sigma^2))/sqrt(2*pi*sigma^2);
-
-% Get values for distribution function, df
-for i=1:len
-    df(i)=integral(fai,interval(1),interval(i));
+% Get random value r in [0,1]
+r = rand(1);
+% Get all individual differences between CDF values and r
+% in order to get corresponding parameter value (inverse the CDF)
+nDiff = abs(cdf-r);
+% Get the index of the value with lowest difference to the
+% (this is how we handle that the computer's not able to handle continuous functions)
+[~, i] = min(nDiff);
+% amend index when corresponding to index=1 (since r is close to 0)
+if i == 1
+    i=find(values == -truncInterval);
 end
+% Get corresponding value to the CDF value (inverse the CDF)
+variate = values(i);
 
-%% Truncated distribution
-
-C=10;
-limit = 2;
-eta = 0;
-sigma = sqrt(1);
-interval = linspace(-C,C,10001);
-len = length(interval);
-
-[~,tcdf] = cdfs(interval,eta,sigma,-limit,limit);
-
-plot(interval,tcdf)
-
-tdf = zeros(1,len);
-sum = 0;
-for i=2:len
-    sum = sum + (interval(i)-interval(i-1))*((tcdf(i)+tcdf(i-1))/2);
-    tdf(i) = sum;
-end
-
-%% Generating samples from given distribution
-
-nr_of_samples = 1000;
-samples = zeros(1,nr_of_samples);
-counter = 1;
-while counter <= nr_of_samples
-    % Get index for closest value
-    [~, i] = min(abs(df-rand(1)));
-    samples(counter) = interval(i);
-    counter = counter + 1;
-end
-% Plotting the inverse
-% plot(df,interval)
+return

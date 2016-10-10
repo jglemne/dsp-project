@@ -6,23 +6,23 @@
 clear
 clc
 
-C = 10;
-limit = 1;
+C = 40;
+limit = 10;
 eta = 0;
-sigma = sqrt(1);
+sigma = 5;
 
 % Generating 10001 points in the interval [-10,10]
 interval = linspace(-C,C,10001);
 
 % Standard N(0,1) CDF and truncated CDF for the interval
-[cdf,tcdf] = cdfs(interval,eta,sigma,-limit,limit);
+[odf,tdf] = dfs(interval,eta,sigma,-limit,limit);
 
 % Numerical integration for testing, should always be approximately 1
-q = trapz(interval,cdf);
-tq = trapz(interval,tcdf);
+q = trapz(interval,odf);
+tq = trapz(interval,tdf);
 
 % Variance for both original and truncated CDF
-sv = stvar(eta,sigma,-C,C);
-tv = stvar(eta,sigma,-limit,limit);
+sv = variance(eta,sigma,-C,C);
+tv = variance(eta,sigma,-limit,limit);
 
-plot(interval,cdf,interval,tcdf)
+plot(interval,odf,interval,tdf)
