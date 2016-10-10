@@ -4,7 +4,8 @@
 % Parameters:
 % binaries - vector dim=1xn with binary digits, IMPORTANT: has to be
 % divisible by 10
-% sequence - vector dim 1x9 with random binary digits, used as "template"
+% sequence - vector dim 1xn with random binary digits, used as "template",
+% preferably with n >= 9
 %
 % Return: p-value, 
 %
@@ -23,21 +24,35 @@
 % is non-random. Otherwise, conclude that the sequence is random.
 %
 % Author: Joel Glemne
-function P = pvalue(binaries,sequence)
+function P = pvalue(binaries,template)
 
-N = 10;
-M = length(binaries)/N;
-m = 9;
-mu = (M-m+1)/(2^m);
-sigmatwo = M*((1/2^m)-((2*m-1)/2^(2*m)));
+% setting up test parameters
+
+% nr of binaries
+nBins = length(binaries);
+% number of blocks N; M > 0.01*n ==> N = 8, and rem(nBins,M) must be zero
+N = 8;
+r = rem(nBins,8);
+if r ~= 0
+    % discarding last elements to make remainder = 0
+    binaries = binaries(1:end-r);
+    nBins = length(binaries);
+end
+% block length M
+M = nBins/N;
+m = length(template); % template length
+mu = (M-m+1)/(2^m); % mean
+sigmatwo = M*((1/2^m)-((2*m-1)/2^(2*m))); % variance
+% dividing the binaries into N blocks of length M
 blocks = reshape(binaries, N, M);
 
+% comparing with template in all N blocks
 W = zeros(1,N);
 for row=1:N
-    v=blocks(row,:);
+    block=blocks(row,:);
     counter = 1;
-    while counter <= length(v)-(m-1)
-        if v(counter:counter+(m-1)) == sequence
+    while counter <= M-(m-1)
+        if block(counter:counter+(m-1)) == template
             W(row) = W(row) + 1;
             counter = counter + (m-1);
         else
