@@ -30,9 +30,11 @@ function P = pvalue(binaries,template)
 
 % nr of binaries
 nBins = length(binaries);
-% number of blocks N; M > 0.01*n ==> N = 8, and rem(nBins,M) must be zero
+% number of blocks N. Conditions: 
+%       M > 0.01*nBins, N <= 100
+%       rem(nBins,M) == 0
 N = 8;
-r = rem(nBins,8);
+r = rem(nBins,N);
 if r ~= 0
     % discarding last elements to make remainder = 0
     binaries = binaries(1:end-r);
@@ -48,12 +50,12 @@ blocks = reshape(binaries, N, M);
 
 % comparing with template in all N blocks
 W = zeros(1,N);
-for row=1:N
-    block=blocks(row,:);
+for j=1:N
+    block=blocks(j,:);
     counter = 1;
     while counter <= M-(m-1)
         if block(counter:counter+(m-1)) == template
-            W(row) = W(row) + 1;
+            W(j) = W(j) + 1;
             counter = counter + (m-1);
         else
             counter = counter + 1;
