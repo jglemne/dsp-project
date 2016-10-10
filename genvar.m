@@ -1,30 +1,34 @@
 % Function: genvar
-% 
+%
 % Parameters:
-% boolTrunc - set it to true if you want variates from a truncated 
+% boolTrunc - set it to true if you want variates from a truncated
 % density function, otherwise false
 % boolBin - set to true if you'd like sequence of binary digits
 % according to requirements in 4.1a. Otherwise, set to false
 % eta - the mean value for the distribution
 % sigma - square root of variance
-% interval - the interval for which you'd like to generate density 
-% function, e.g. if the interval is [-10,10], then this value should 
+% interval - the interval for which you'd like to generate density
+% function, e.g. if the interval is [-10,10], then this value should
 % be 10
 % nVariates - how many variates you'd like to generate
-% truncInterval - if you want to truncate the function to the 
+% truncInterval - if you want to truncate the function to the
 % interval [-4,4], then truncInterval = 4
+% method - pass a string to tell which randomization method to use, e.g.
+% 'arm' which will trigger the accept-reject method
+% Possible methods: 'arm', 'itm'
 %
-% Return: 1xnVariates matrix with all the generated random values from 
+% Return: 1xnVariates matrix with all the generated random values from
 % the distribution
 %
-% Function call example: newVariates = genvar(true,false,0,1,10,100,10000,2)
-% This will generate 10000 random values from a normal distribution 
+% Function call example:
+% newVariates = genvar(true,false,0,1,10,10000,2,'itm')
+% This will generate 10000 random values from a normal distribution
 % N(0,1), truncated to the interval [-2,2] since boolTrunc=true and
-% truncInterval=2. The distribution accuracy is set to 100 which 
-% means that the possible discrete distribution values V with conditions:
-% 1. V=n*0.01, and
-% 2. V is in the interval [-10,10]. 
-function variates = genvar(boolTrunc,boolBin,eta,sigma,interval,nVariates,truncInterval)
+% truncInterval=2. Method for getting random number will be ITM, or
+% Inverse Transformation Method
+function variates = genvar(...
+    boolTrunc,boolBin,eta,sigma,...
+    interval,nVariates,truncInterval,method)
 
 % Creating value interval matrix with accuracy 100 values per unit
 nSamples = 2*interval*100+1;
@@ -57,10 +61,24 @@ cdf(end) = 1;
 % Allocating memory for variates
 variates = zeros(1,nVariates);
 for counter=1:nVariates
-    if boolBin
-        variates(counter) = binvar(cdf,values,truncInterval);
-    else
-        variates(counter) = itm(cdf,values,truncInterval);
+    switch method
+        case 'arm'
+            if boolBin
+                variates(counter) = binvar(densFun,values,...
+                    truncInterval,method);
+            else
+                variates(counter) = arm(densFun,values,truncInterval);
+            end
+        case 'itm'
+            if boolBin
+                variates(counter) = binvar(cdf,values,truncInterval,method);
+            else
+                variates(counter) = itm(cdf,values,truncInterval);
+            end
+        otherwise
+            msg = strcat('The method "',method,...
+                '" you have given is not a valid method');
+            error(msg);
     end
 end
 

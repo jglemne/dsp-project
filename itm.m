@@ -1,7 +1,6 @@
 % Function: itm (inverse transformation method)
 %
 % Parameters:
-% Parameters:
 % cdf - vector with values for the cumulative distribution function
 % values - values interval
 % truncInterval - where to truncate the interval
