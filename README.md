@@ -1,4 +1,4 @@
-# Digital signal processing - Random number generators
+# Random number generators
 Practical discrete time stochastic processes and tests of randomness. Project in the course EE706 Digital Signal Processing at University of Auckland 2016. 
 
 ### RNGs
