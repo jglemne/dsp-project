@@ -1,4 +1,5 @@
 % Function: pvalue
+% Non-overlapping Template Matching Test
 %
 % Parameters:
 % binaries - vector dim=1xn with binary digits, IMPORTANT: has to be
