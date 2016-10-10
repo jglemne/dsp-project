@@ -7,6 +7,7 @@
 % df - vector with theoretic values corresponding to a density function
 %
 % Return: Mean Square Error, scalar value
+% Author: Joel Glemne
 function value = mse(variates, df)
 
 % nBins = number of preferred bins when dividing all variates

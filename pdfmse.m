@@ -8,6 +8,7 @@
 % interval - function generates values for [-interval,interval]
 % truncInterval - truncates the density function to the interval
 % [-truncInterval,truncInterval]
+% Author: Joel Glemne
 function value = pdfmse(nVariates,eta,sigma,interval,truncInterval)
 
 % Create interval with accuracy of two decimals

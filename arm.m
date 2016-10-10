@@ -7,6 +7,7 @@
 % truncInterval - where to truncate the interval
 %
 % Return: random number according to given distribution
+% Author: Joel Glemne
 function variate = arm(df,values,interval)
 
 % Get random value r within interval [-interval,interval]

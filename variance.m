@@ -1,3 +1,4 @@
+% Author: Joel Glemne
 function v = variance(eta,sigma,low,high)
 
 fai = @(value) exp(-(value-eta).^2/(2*sigma^2))/sqrt(2*pi*sigma^2);

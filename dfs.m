@@ -10,6 +10,7 @@
 % Return: two vectors, dim = 1xlen(x), one with sample values
 % for the density function corresponding to the ordinary normal 
 % distribution (odf) and one for the truncated (tdf)
+% Author: Joel Glemne
 function [odf,tdf] = dfs(x,eta,sigma,low,high)
 
 % Counting number of samples

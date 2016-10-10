@@ -9,6 +9,7 @@
 % Possible methods: 'arm', 'itm'
 %
 % Return: random binary digit according to given distribution
+% Author: Joel Glemne
 function bin = binvar(fun,values,truncInterval,method)
 
 switch method

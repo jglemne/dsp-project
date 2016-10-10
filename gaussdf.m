@@ -1,3 +1,4 @@
+% Author: Joel Glemne
 % 1. Continuous, discrete and truncated Gaussian density function
 
 % Task: Continuous density function (CDF)

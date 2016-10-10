@@ -26,6 +26,7 @@
 % N(0,1), truncated to the interval [-2,2] since boolTrunc=true and
 % truncInterval=2. Method for getting random number will be ITM, or
 % Inverse Transformation Method
+% Author: Joel Glemne
 function variates = genvar(...
     boolTrunc,boolBin,eta,sigma,...
     interval,nVariates,truncInterval,method)

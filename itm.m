@@ -6,6 +6,7 @@
 % truncInterval - where to truncate the interval
 %
 % Return: random number according to given distribution
+% Author: Joel Glemne
 function variate = itm(cdf,values,truncInterval)
 
 % Get random value r in [0,1]
