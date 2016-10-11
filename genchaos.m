@@ -7,9 +7,11 @@
 % Return: 
 % variates - matrix-vector 1xnVariates containing randomly generated 
 % values according to chaotic distribution
+% df - vector with values corresponding to density function for 
+% chaotic distribution
 %
 % Author: Joel Glemne
-function variates = genchaos(nVariates,interval)
+function [variates,df] = genchaos(nVariates,interval)
 
 [df,x] = chaos(interval);
 nSamples = length(x);

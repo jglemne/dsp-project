@@ -25,7 +25,7 @@ end
 dfValue = df(i);
 newr = max(df)*rand(1);
 if newr > dfValue
-    variate = arm(df,values,interval)
+    variate = arm(df,values,interval);
 else
     variate = values(i);
 end
