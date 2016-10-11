@@ -1,3 +1,11 @@
+% Function: chaos
+%
+% Parameter:
+% interval - deciding interval for distribution, interval=1 ==> [-1,1]
+%
+% Return: 
+% f_c - theoretical values in density function for chaotic distribution
+% x - values in [-interval,interval] with accuracy of two decimals
 function [f_c,x] = chaos(interval)
 
 accuracy = 2*interval*10000+1;

@@ -1,3 +1,12 @@
+% Function: genchaos
+%
+% Parameters:
+% nVariates - how many variates you wish to generate
+% interval - generating values in the interval [-interval,interval]
+%
+% Return: 
+% variates - matrix-vector 1xnVariates containing randomly generated 
+% values according to chaotic distribution
 function variates = genchaos(nVariates,interval)
 
 [df,x] = chaos(interval);
