@@ -3,6 +3,7 @@
 % Parameters:
 % nVariates - how many variates you wish to generate
 % interval - generating values in the interval [-interval,interval]
+% boolBin - set to true if wanting random binary digits
 %
 % Return: 
 % variates - matrix-vector 1xnVariates containing randomly generated 
@@ -11,7 +12,7 @@
 % chaotic distribution
 %
 % Author: Joel Glemne
-function [variates,df] = genchaos(nVariates,interval)
+function [variates,df] = genchaos(nVariates,interval,boolBin)
 
 [df,x] = chaos(interval);
 nSamples = length(x);
@@ -32,7 +33,11 @@ cdf(end) = 1;
 
 variates = zeros(1,nVariates);
 for i=1:nVariates
-    variates(i) = itm(cdf,x,interval);
+    if boolBin
+        variates(i) = binchaos(cdf,x,interval);
+    else
+        variates(i) = itm(cdf,x,interval);
+    end
 end
 
 return
