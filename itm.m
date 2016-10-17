@@ -19,9 +19,10 @@ nDiff = abs(cdf-r);
 [~, i] = min(nDiff);
 % amend index when corresponding to index=1 (since r is close to 0)
 if i == 1
-    i=find(values == -truncInterval);
+    variate = -truncInterval;
+    % Otherwise, get corresponding value to the CDF value (inverse the CDF)
+else
+    variate = values(i);
 end
-% Get corresponding value to the CDF value (inverse the CDF)
-variate = values(i);
 
 return

@@ -3,7 +3,7 @@
 % Parameters:
 % x - samples vector, matrix dimensions: 1xlen(x)
 % eta - mean value of distribution
-% sigma - square root of variance for the distribution
+% sigma - standard deviation/square root of variance for the distribution
 % low - lower limit of truncation interval
 % high - upper limit of truncation interval
 %

@@ -11,7 +11,7 @@
 function value = mse(variates, df)
 
 % nBins = number of preferred bins when dividing all variates
-nBins = 1000;
+nBins = 100;
 % Calculating nr of variates for scaling during MSE-calculation
 nVariates = length(variates);
 % N is vector and N(i) is number of variates in bin i, i=1,2,...,nBins
