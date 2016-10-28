@@ -1,9 +1,9 @@
-% Function: arc (accept-reject method)
+% Function: arm (accept-reject method)
 %
 % Parameters:
 % df - vector with values for the density function corresponding
 % to an arbitrary distribution
-% values - values interval
+% values - values within interval
 % truncInterval - where to truncate the interval
 %
 % Return: random number according to given distribution
