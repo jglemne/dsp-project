@@ -1,5 +1,5 @@
 # Random number generators
-Practical discrete time stochastic processes and tests of randomness. Project in the course EE706 Digital Signal Processing at University of Auckland 2016. 
+Practical discrete time stochastic processes and tests of randomness.
 
 ### RNGs
 Currently only using two implementations; standard accept-reject and inverse transformation method.
